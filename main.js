@@ -8,10 +8,10 @@ var player_y=10;
 var player_objects="";
 
 function player_update() {
-    fabric.image.fromURL("player.png",function(Img) {
+    fabric.Image.fromURL("player.png",function(Img) {
         player_objects=Img;
         player_objects.scaleToWidth(150);
-        player_objects.scaleTohHeight(150);
+        player_objects.scaleToHeight(150);
         player_objects.set({
         top:player_y,
         left:player_x
@@ -20,10 +20,10 @@ function player_update() {
     });
 }
 function new_image(get_image) {
-    fabric.image.fromURL(get_image,function(Img) {
+    fabric.Image.fromURL(get_image,function(Img) {
         block_objects=Img;
         block_objects.scaleToWidth(block_image_width);
-        block_objects.scaleTohHeight(block_image_height);
+        block_objects.scaleToHeight(block_image_height);
         block_objects.set({
         top:player_y,
         left:player_x
@@ -63,7 +63,7 @@ if(keypressed == '40'){
 }
 
 if(keypressed == '39'){
-    up();
+    right();
 }
 
 if(keypressed == '87'){
@@ -103,4 +103,42 @@ if(keypressed == '67'){
 }
 }
 
+function up(){
+    if(player_y>=0){
+        player_y=player_y-block_image_height;
+        console.log("block image height="+ block_image_height);
+        console.log("when up arrow key is pressed,x="+player_x + ",Y="+player_y);
+        canvas.remove(player_objects);
+        player_update();
+    }
+}
 
+function down(){
+    if(player_y<=500){
+        player_y=player_y+block_image_height;
+        console.log("block image height="+ block_image_height);
+        console.log("when down arrow key is pressed,x="+player_x + ",Y="+player_y);
+        canvas.remove(player_objects);
+        player_update();
+    }
+}
+
+function left(){
+    if(player_x>=0){
+        player_x=player_x-block_image_width;
+        console.log("block image width="+block_image_width);
+        console.log("when left arrow key is pressed,x="+player_x + ",Y="+player_y);
+        canvas.remove(player_objects);
+        player_update();
+    }
+}
+
+function right(){
+    if(player_x<=850){
+        player_x=player_x+block_image_width;
+        console.log("block image width="+ block_image_width);
+        console.log("when right arrow key is pressed,x="+player_x + ",Y="+player_y);
+        canvas.remove(player_objects);
+        player_update();
+    }
+}    
